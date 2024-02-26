@@ -1,0 +1,28 @@
+
+
+<!-- <table>
+    <thead>
+      <tr>
+        <th>Nombre del Anime</th>
+        <th>Número de Personajes</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for anime in animes %}
+      <tr>
+        <td>{{ anime.nombre_anime }}</td>
+        <td>{{ anime.num_personajes }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table> -->
+
+
+  {% for anime in animex %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{ anime.nombre_anime }}</h5>
+      <p class="card-text">Este anime tiene {{ anime.num_personajes }} personajes.</p>
+    </div>
+  </div>
+{% endfor %}

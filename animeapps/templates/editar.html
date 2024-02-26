@@ -1,0 +1,45 @@
+
+
+
+{% extends 'layouts/nav-tem.html' %}
+
+{% block content %}
+
+<div class="container w-50 py-3">
+  <div class="row">
+      <div class="col-12">
+          <h2>Editar Anime</h2>
+      </div>
+  </div>
+  <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+          <label for="anime">Seleccione el anime a editar:</label>
+          <select id="anime" name="anime" class="form-control">
+              {% for anime in animes %}
+              <option value="{{ anime.id_anime }}">{{ anime.nombre_anime }}</option>
+              {% endfor %}
+          </select>
+      </div>
+      <div class="form-group">
+          <label for="nombre_anime">Nuevo nombre del anime:</label>
+          <input type="text" id="nombre_anime" name="nombre_anime" class="form-control">
+      </div>
+      <div class="form-group">
+          <label for="genero">Nuevo género:</label>
+          <select id="genero" name="genero" class="form-control">
+              {% for genero in generos %}
+              <option value="{{ genero.id_genero }}">{{ genero.nombre }}</option>
+              {% endfor %}
+          </select>
+      </div>
+      <div class="form-group">
+        <label for="imagen">Nueva imagen:</label>
+        <input type="text" id="imagen" name="imagen" class="form-control">
+    </div>
+      <div class="py-3">
+          <button class="btn btn-primary" type="submit">Editar anime</button>
+      </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+
+{% extends 'layouts/nav-tem.html' %}
+
+{% block content %}
+<div class="container">
+
+    <div class="py-3">
+    <form method="POST" class="d-flex align-items-center">
+        {% csrf_token %}
+        <div>
+        <label for="year">Año:</label>
+        <select name="year" id="year">
+            <option value="">Año</option>
+            {% for ano in listaanos %}
+              <option value="{{ ano }}">{{ ano }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="px-2">
+        <label for="genero">Género:</label>
+        <select name="genero" id="genero">
+            <option value="">género</option>
+            {% for gen in generos %}
+            <option value="{{ gen.id_genero }}">{{ gen.nombre }}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div class="px-2">
+            <label for="estado">Estado:</label>
+            <select name="estado" id="estado">
+                <option value="">Estado</option>
+                <option value="En emisión">En emisión</option>
+                <option value="Finalizado">Finalizado</option>
+                <option value="Proximamente">Proximamente</option>
+                <!-- agregar más opciones de años -->
+            </select>
+        </div>
+        <div class="px-2">
+            <label for="tipo">Tipo:</label>
+            <select name="tipo" id="tipo">
+                <option value="">Tipo</option>
+                <option value="Serie">Serie</option>
+                <option value="Pelicula">Película</option>
+                <option value="OVA">OVA</option>
+                <!-- agregar más opciones de años -->
+            </select>
+        </div>
+        <div class="px-3 ">
+        <button class="btn btn-primary" type="submit">Filtrar</button>
+        </div>
+    </form>
+    </div>
+    <div> 
+        {% if animes %}
+        <div class="row justify">
+            {% for anime in animes %}
+                <div class="col-xs-12 col-md-4 col-xl-2 py-3">
+                    <div class="card mb-2">
+                        <a href="{% url 'info_anime' anime.id_anime %}">
+                        <img src="{{ anime.image }}" class="card-img-top d-flex align-items-center" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate">{{ anime.nombre_anime }}</h5>
+                            <p class="card-text">{{ anime.genero_id_genero }}</p>
+                            <p>{{anime.num_personajes}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p>No se encontraron animes para el año especificado.</p>
+        {% endif %}
+        
+    </div>
+
+</div>
+
+{% endblock %}
